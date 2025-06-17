@@ -6,27 +6,28 @@
   "url": "https://github.com/Cialona-Erik/Trello-Pretty-Card-Printer/blob/main/printer.png?raw=true"
 },
 "capabilities": {
+  "card-buttons": [
+    {
+      "text": "Print Card",
+      "callback": "printCard",
+      "icon": "https://cialona-erik.github.io/cialona-card-printer/printer.png"
+    }
+  ],
   "card-back-section": {
     "title": "Card Tools",
-    "icon": "https://github.com/Cialona-Erik/Trello-Pretty-Card-Printer/blob/main/printer.png?raw=true",
+    "icon": "https://cialona-erik.github.io/cialona-card-printer/printer.png",
     "content": {
       "type": "iframe",
-      "url": "./index.html",
+      "url": "https://cialona-erik.github.io/cialona-card-printer/index.html",
       "height": 50
     }
   },
-"card-buttons": [
-  {
-    "text": "Print Card",
-    "callback": "printCard",
-    "icon": "https://github.com/Cialona-Erik/Trello-Pretty-Card-Printer/blob/main/printer.png?raw=true"
-  }
-],
   "show-settings": {
-    "url": "./index.html",
+    "url": "https://cialona-erik.github.io/cialona-card-printer/index.html",
     "height": 100
   }
 }
+
 
   ,
   "connectors": {},
