@@ -1,7 +1,7 @@
 TrelloPowerUp.initialize({
   'card-buttons': function (t) {
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer.png',
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
       text: 'Print Card',
       callback: function (t) {
         return t.card('name', 'desc', 'labels', 'checklists').then(function (card) {
@@ -32,9 +32,9 @@ TrelloPowerUp.initialize({
 
 window.printCard = function () {
   const t = TrelloPowerUp.iframe();
-  t.card('name', 'desc', 'labels', 'checklists')
+  return t.card('name', 'desc', 'labels', 'checklists')  // Added return here
     .then(function (card) {
       const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
-      t.modal({ url, fullscreen: false, height: 500, title: 'Print Card' });
+      return t.modal({ url, fullscreen: false, height: 500, title: 'Print Card' });
     });
 };
