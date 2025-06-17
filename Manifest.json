@@ -1,0 +1,35 @@
+{
+  "name": "Cialona-Card-Printer",
+  "id": "Cialona-card-printer",
+  "author": "Erik Zwart - DodDes1gn",
+  "icon": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
+  },
+"capabilities": {
+  "card-back-section": {
+    "title": "Card Tools",
+    "icon": "https://cdn-icons-png.flaticon.com/512/1159/1159633.png",
+    "content": {
+      "type": "iframe",
+      "url": "./index.html",
+      "height": 50
+    }
+  },
+  "card-buttons": [
+    {
+      "text": "Print Card",
+      "callback": "printCard",
+      "icon": "https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
+    }
+  ],
+  "show-settings": {
+    "url": "./index.html",
+    "height": 100
+  }
+}
+
+  ,
+  "connectors": {},
+  "permissions": [],
+  "version": "1.0"
+}
