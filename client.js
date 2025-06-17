@@ -20,7 +20,7 @@ TrelloPowerUp.initialize({
   'card-back-section': function (t) {
     return {
       title: 'Card Tools',
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer.png',
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
       content: {
         type: 'iframe',
         url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html',
