@@ -1,31 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Print View</title>
+  <meta charset="utf-8" />
+  <title>Print Card</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
-    .label { display: inline-block; margin: 4px; padding: 4px 8px; color: #fff; border-radius: 4px; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { margin-bottom: 10px; }
   </style>
 </head>
 <body>
   <h1 id="card-title"></h1>
-  <div id="card-labels"></div>
   <p id="card-desc"></p>
   <button onclick="window.print()">Print</button>
+
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById('card-title').textContent = params.get('name');
-    document.getElementById('card-desc').textContent = params.get('desc');
-
-    const labels = JSON.parse(decodeURIComponent(params.get('labels')));
-    const container = document.getElementById('card-labels');
-    labels.forEach(label => {
-      const el = document.createElement('span');
-      el.className = 'label';
-      el.textContent = label.name;
-      el.style.backgroundColor = label.color || 'gray';
-      container.appendChild(el);
-    });
+    document.getElementById('card-title').innerText = params.get('name') || 'No Title';
+    document.getElementById('card-desc').innerText = params.get('desc') || 'No Description';
   </script>
 </body>
 </html>
