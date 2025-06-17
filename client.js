@@ -5,7 +5,7 @@ TrelloPowerUp.initialize({
       text: 'Print Card',
       callback: function (t) {
         return t.card('name', 'desc', 'labels', 'checklists').then(function (card) {
-          const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
+          const url = `https://super-moxie-650636.netlify.app/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
           return t.modal({
             url: url,
             fullscreen: false,
@@ -34,7 +34,7 @@ window.printCard = function () {
   return TrelloPowerUp.iframe().then(t => {
     return t.card('name', 'desc', 'labels', 'checklists')
       .then(function (card) {
-        const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
+        const url = `https://super-moxie-650636.netlify.app/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
         return t.modal({ url, fullscreen: false, height: 500, title: 'Print Card' });
       });
   });
