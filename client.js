@@ -6,11 +6,17 @@ TrelloPowerUp.initialize({
       callback: function(t) {
         return t.card('name', 'desc').then(card => {
           const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}`;
-          return t.modal({ url, title: 'Print Card', height: 500 });
+          return t.modal({
+            url: url,
+            title: 'Print Card',
+            height: 500,
+            fullscreen: false
+          });
         });
       }
     }];
   },
+
   'card-back-section': function(t) {
     return {
       title: 'Card Tools',
