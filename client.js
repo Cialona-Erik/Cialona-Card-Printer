@@ -1,7 +1,7 @@
 TrelloPowerUp.initialize({
   'card-buttons': function (t) {
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
+      icon: 'https://super-moxie-650636.netlify.app/printer-small.png',
       text: 'Print Card',
       callback: function (t) {
         return t.card('name', 'desc', 'labels', 'checklists').then(function (card) {
@@ -20,10 +20,10 @@ TrelloPowerUp.initialize({
   'card-back-section': function (t) {
     return {
       title: 'Card Tools',
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
+      icon: 'https://super-moxie-650636.netlify.app/printer-small.png',
       content: {
         type: 'iframe',
-        url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html',
+        url: 'https://super-moxie-650636.netlify.app/index.html',
         height: 50
       }
     };
