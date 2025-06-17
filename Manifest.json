@@ -3,29 +3,30 @@
   "id": "Cialona-card-printer",
   "author": "Erik Zwart - DodDes1gn",
 "icon": {
-  "url": "https://cialona-erik.github.io/Cialona-Card-Printer/printer.png"
+  "url": "/printer.png"
 },
 "capabilities": {
-  "card-buttons": [
-    {
-      "text": "Print Card",
-      "callback": "printCard",
-      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer.png"
-    }
-  ],
-  "card-back-section": {
-    "title": "Card Tools",
-    "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer.pngg",
-    "content": {
-      "type": "iframe",
-      "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
-      "height": 50
-    }
-  },
-  "show-settings": {
+"card-back-section": {
+  "title": "Card Tools",
+  "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer.png",
+  "content": {
+    "type": "iframe",
     "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
-    "height": 100
+    "height": 50
   }
+},
+"card-buttons": [
+  {
+    "text": "Print Card",
+    "callback": "printCard",
+    "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer.png"
+  }
+],
+"show-settings": {
+  "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
+  "height": 100
+}
+
 }
 
 
