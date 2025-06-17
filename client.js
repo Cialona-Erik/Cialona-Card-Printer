@@ -1,11 +1,16 @@
+console.log('client.js loaded - TrelloPowerUp initialize starting');
+
 TrelloPowerUp.initialize({
   'card-buttons': function(t) {
+    console.log('card-buttons handler called');
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png', // Consider using SVG for better theming
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
       text: 'Print Card',
-      condition: 'edit', // Show button only to users who can edit the board
+      condition: 'edit',
       callback: function(t) {
+        console.log('Print Card button clicked');
         return t.card('name', 'desc').then(card => {
+          console.log('Card data fetched:', card);
           const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}`;
           return t.modal({
             url: url,
@@ -19,6 +24,7 @@ TrelloPowerUp.initialize({
   },
 
   'card-back-section': function(t) {
+    console.log('card-back-section handler called');
     return {
       title: 'Card Tools',
       icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
