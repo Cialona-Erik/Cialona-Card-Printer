@@ -1,0 +1,26 @@
+{
+  "name": "Pretty Card Printer",
+  "id": "pretty-card-printer",
+  "author": "Your Name",
+  "icon": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
+  },
+  "capabilities": {
+    "card-back-section": {
+      "title": "Card Tools",
+      "icon": "https://cdn-icons-png.flaticon.com/512/1159/1159633.png",
+      "content": {
+        "type": "iframe",
+        "url": "./index.html",
+        "height": 50
+      }
+    },
+    "show-settings": {
+      "url": "./index.html",
+      "height": 100
+    }
+  },
+  "connectors": {},
+  "permissions": [],
+  "version": "1.0"
+}
