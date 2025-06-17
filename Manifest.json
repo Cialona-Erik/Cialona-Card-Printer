@@ -1,33 +1,27 @@
 {
-  "name": "Cialona-Card-Printer",
-  "id": "Cialona-card-printer",
+  "name": "Cialona Card Printer Minimal",
+  "id": "cialona-card-printer-minimal",
   "author": "Erik Zwart - DodDes1gn",
   "icon": {
-    "url": "https://super-moxie-650636.netlify.app/printer-small.png"
+    "url": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png"
   },
   "capabilities": {
-    "card-back-section": {
-      "title": "Card Tools",
-      "icon": "https://super-moxie-650636.netlify.app/printer-small.png",
-      "content": {
-        "type": "iframe",
-        "url": "https://super-moxie-650636.netlify.app/index.html",
-        "height": 50
-      }
-    },
     "card-buttons": [
       {
         "text": "Print Card",
         "callback": "printCard",
-        "icon": "https://super-moxie-650636.netlify.app/printer-small.png"
+        "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png"
       }
     ],
-    "show-settings": {
-      "url": "https://super-moxie-650636.netlify.app/index.html",
-      "height": 100
+    "card-back-section": {
+      "title": "Card Tools",
+      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png",
+      "content": {
+        "type": "iframe",
+        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
+        "height": 50
+      }
     }
   },
-  "connectors": {},
-  "permissions": [],
   "version": "1.0"
 }
