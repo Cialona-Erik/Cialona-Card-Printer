@@ -31,10 +31,11 @@ TrelloPowerUp.initialize({
 });
 
 window.printCard = function () {
-  const t = TrelloPowerUp.iframe();
-  return t.card('name', 'desc', 'labels', 'checklists')  // Added return here
-    .then(function (card) {
-      const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
-      return t.modal({ url, fullscreen: false, height: 500, title: 'Print Card' });
-    });
+  return TrelloPowerUp.iframe().then(t => {
+    return t.card('name', 'desc', 'labels', 'checklists')
+      .then(function (card) {
+        const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}&labels=${encodeURIComponent(JSON.stringify(card.labels))}`;
+        return t.modal({ url, fullscreen: false, height: 500, title: 'Print Card' });
+      });
+  });
 };
