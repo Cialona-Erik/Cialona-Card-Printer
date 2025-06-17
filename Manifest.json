@@ -3,12 +3,12 @@
   "id": "Cialona-card-printer",
   "author": "Erik Zwart - DodDes1gn",
   "icon": {
-    "url": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png"
+    "url": "https://super-moxie-650636.netlify.app/printer-small.png"
   },
   "capabilities": {
     "card-back-section": {
       "title": "Card Tools",
-      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png",
+      "icon": "https://super-moxie-650636.netlify.app/printer-small.png",
       "content": {
         "type": "iframe",
         "url": "https://super-moxie-650636.netlify.app/index.html",
@@ -19,7 +19,7 @@
       {
         "text": "Print Card",
         "callback": "printCard",
-        "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png"
+        "icon": "https://super-moxie-650636.netlify.app/printer-small.png"
       }
     ],
     "show-settings": {
