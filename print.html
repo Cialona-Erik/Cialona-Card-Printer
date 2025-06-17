@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css">
+  <title>Print View</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .label { display: inline-block; margin: 4px; padding: 4px 8px; color: #fff; border-radius: 4px; }
+  </style>
 </head>
 <body>
-  <div class="card-print">
-    <h1 id="card-title"></h1>
-    <div id="card-labels" class="labels"></div>
-    <p id="card-desc"></p>
-    <button onclick="window.print()">Print</button>
-  </div>
-
+  <h1 id="card-title"></h1>
+  <div id="card-labels"></div>
+  <p id="card-desc"></p>
+  <button onclick="window.print()">Print</button>
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById('card-title').innerText = params.get('name');
-    document.getElementById('card-desc').innerText = params.get('desc');
+    document.getElementById('card-title').textContent = params.get('name');
+    document.getElementById('card-desc').textContent = params.get('desc');
 
     const labels = JSON.parse(decodeURIComponent(params.get('labels')));
-    const labelContainer = document.getElementById('card-labels');
-
+    const container = document.getElementById('card-labels');
     labels.forEach(label => {
-      const span = document.createElement('span');
-      span.className = 'label';
-      span.style.backgroundColor = label.color || 'gray';
-      span.innerText = label.name;
-      labelContainer.appendChild(span);
+      const el = document.createElement('span');
+      el.className = 'label';
+      el.textContent = label.name;
+      el.style.backgroundColor = label.color || 'gray';
+      container.appendChild(el);
     });
   </script>
 </body>
