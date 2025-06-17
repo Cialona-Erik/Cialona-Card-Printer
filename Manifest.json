@@ -1,33 +1,5 @@
 {
-  "name": "Cialona-Card-Printer",
-  "id": "Cialona-card-printer",
-  "author": "Erik Zwart - DodDes1gn",
-  "icon": {
-    "url": "https://super-moxie-650636.netlify.app/printer-small.png"
-  },
-  "capabilities": {
-    "card-back-section": {
-      "title": "Card Tools",
-      "icon": "https://super-moxie-650636.netlify.app/printer-small.png",
-      "content": {
-        "type": "iframe",
-        "url": "https://super-moxie-650636.netlify.app/index.html",
-        "height": 50
-      }
-    },
-    "card-buttons": [
-      {
-        "text": "Print Card",
-        "callback": "printCard",
-        "icon": "https://super-moxie-650636.netlify.app/printer-small.png"
-      }
-    ],
-    "show-settings": {
-      "url": "https://super-moxie-650636.netlify.app/index.html",
-      "height": 100
-    }
-  },
-  "connectors": {},
-  "permissions": [],
-  "version": "1.0"
+  "name": "Test",
+  "id": "test",
+  "capabilities": {}
 }
