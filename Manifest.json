@@ -11,7 +11,7 @@
       "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png",
       "content": {
         "type": "iframe",
-        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
+    "url": "https://super-moxie-650636.netlify.app/index.html",
         "height": 50
       }
     },
@@ -22,10 +22,10 @@
         "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png"
       }
     ],
-    "show-settings": {
-      "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
-      "height": 100
-    }
+"show-settings": {
+  "url": "https://super-moxie-650636.netlify.app/index.html",
+  "height": 100
+}
   },
   "connectors": {},
   "permissions": [],
