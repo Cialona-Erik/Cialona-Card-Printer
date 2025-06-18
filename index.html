@@ -1,59 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <style>
-    body { margin: 0; padding: 0; background: none; font-family: 'Segoe UI', Arial, sans-serif; }
-    .print-inline-btn {
-      display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px 0;
-    }
-    .print-btn {
-      background: #26044e; color: #f79a14; border: none; border-radius: 6px; font-weight: 600;
-      padding: 9px 24px; cursor: pointer; font-size: 1em; box-shadow: 0 2px 6px #f7f8fa;
-      transition: background .18s; display: flex; align-items: center; gap: 8px;
-    }
-    .print-btn:hover { background: #5d43a7; }
-    .print-icon { width: 20px; height: 20px; vertical-align: middle; }
-  </style>
-</head>
+<head><meta charset="utf-8"></head>
 <body>
-  <div class="print-inline-btn">
-    <button class="print-btn" id="cardPrint">
-      <img class="print-icon" src="https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg" alt="Print">
-      Print this card
-    </button>
-  </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
-  <script>
-    var t = TrelloPowerUp.iframe();
-    document.getElementById('cardPrint').onclick = function() {
-      t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
-        let coverUrl = '';
-        if (card.cover && card.cover.sharedSourceUrl) {
-          coverUrl = card.cover.sharedSourceUrl;
-        } else if (card.cover && card.cover.url) {
-          coverUrl = card.cover.url;
-        }
-        const due = card.due ? card.due : '';
-        const members = (card.members && card.members.length)
-          ? JSON.stringify(card.members.map(m => ({ fullName: m.fullName, avatarUrl: m.avatarUrl })))
-          : '';
-        const url =
-          'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
-          'name=' + encodeURIComponent(card.name) +
-          '&desc=' + encodeURIComponent(card.desc) +
-          (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
-          (due ? '&due=' + encodeURIComponent(due) : '') +
-          (members ? '&members=' + encodeURIComponent(members) : '');
-        return t.modal({
-          url,
-          title: 'Print Card - Cialona - Powered by E.Zwart',
-          height: 500,
-          width: 880,
-          fullscreen: false
-        });
-      });
-    };
-  </script>
+  <script src="client.js"></script>
 </body>
 </html>
