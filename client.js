@@ -54,7 +54,7 @@ TrelloPowerUp.initialize({
     }];
   },
 
-  'printCard': printCard,
+//  'printCard': printCard,
 
 //  'card-back-section': function(t) {
 //    console.log('card-back-section handler called');
