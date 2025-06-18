@@ -54,6 +54,7 @@ TrelloPowerUp.initialize({
     }];
   },
 
+// This part can add a new row under the description in the card pop up
 //  'card-back-section': function(t) {
 //    console.log('card-back-section handler called');
 //    return {
