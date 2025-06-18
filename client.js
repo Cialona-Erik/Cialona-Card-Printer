@@ -55,16 +55,16 @@ TrelloPowerUp.initialize({
   },
 
 // This part can add a new row under the description in the card pop up
-  'card-back-section': function(t) {
-    console.log('card-back-section handler called');
-    return {
-      title: 'Print this Card - Powered by E.Zwart',
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
-      content: {
-        type: 'iframe',
-        url: 'https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html',
-        height: 60
-      }
-    };
-  }
+'card-back-section': function(t) {
+  console.log('card-back-section handler called');
+  return t.signUrl('https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html').then(signedUrl => ({
+    title: '[Print this Card - Powered by E.Zwart]',
+    icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
+    content: {
+      type: 'iframe',
+      url: signedUrl, // ✅ signed URL fixes sandbox errors
+      height: 60
+    }
+  }));
+}
 });
