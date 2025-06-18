@@ -4,7 +4,7 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t) {
     console.log('card-buttons handler called');
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
       text: 'Print this card',
       condition: 'edit',
       callback: function(t) {
