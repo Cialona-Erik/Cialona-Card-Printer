@@ -5,11 +5,28 @@
   "icon": {
     "url": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
   },
-  "capabilities": [
-    "card-back-section",
-    "card-buttons",
-    "show-settings"
-  ],
+  "capabilities": {
+    "card-back-section": {
+      "title": "Print this Card - Powered by E.Zwart",
+      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
+      "content": {
+        "type": "iframe",
+        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html",  // <-- Make sure this is the actual print button!
+        "height": 60
+      }
+    },
+    "card-buttons": [
+      {
+        "text": "Print this card",
+        "callback": "card-buttons",
+        "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
+      }
+    ],
+    "show-settings": {
+      "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
+      "height": 100
+    }
+  },
   "connectors": {},
   "permissions": [],
   "version": "1.0"
