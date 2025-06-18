@@ -4,12 +4,12 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t) {
     console.log('card-buttons handler called');
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg', // SVG icon for Trello button
       text: 'Print this card',
       condition: 'edit',
       callback: function(t) {
         console.log('Print Card button clicked');
-        // Get all needed card fields
+        // Get all needed card fields (name, desc, cover, due, members)
         return t.card('name', 'desc', 'cover', 'due', 'members').then(card => {
           console.log('Card data fetched:', card);
 
@@ -23,10 +23,16 @@ TrelloPowerUp.initialize({
 
           // Prepare due date and members for URL
           const due = card.due ? card.due : '';
+
+          // Map members to only the needed fields (fullName, avatarUrl)
           const members = (card.members && card.members.length)
-            ? JSON.stringify(card.members.map(m => ({ fullName: m.fullName, avatarUrl: m.avatarUrl })))
+            ? JSON.stringify(card.members.map(m => ({
+                fullName: m.fullName,
+                avatarUrl: m.avatarUrl // might be undefined/null, that's fine
+              })))
             : '';
 
+          // Build the print.html URL with all query params
           const url =
             'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
             'name=' + encodeURIComponent(card.name) +
