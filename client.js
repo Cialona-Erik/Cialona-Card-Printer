@@ -44,7 +44,7 @@ TrelloPowerUp.initialize({
           console.log('Opening modal with URL:', url);
           return t.modal({
             url,
-            title: 'Print Card - Cialona - Powered by E.Zwart',
+            title: 'Print Card - Powered by E.Zwart',
             height: 500,
             width: 880,
             fullscreen: false
