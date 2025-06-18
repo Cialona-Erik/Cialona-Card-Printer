@@ -9,8 +9,8 @@ TrelloPowerUp.initialize({
       condition: 'edit',
       callback: function(t) {
         console.log('Print Card button clicked');
-        // Get name, desc, and cover from card
-        return t.card('name', 'desc', 'cover').then(card => {
+        // Get all needed card fields
+        return t.card('name', 'desc', 'cover', 'idMembers', 'due').then(card => {
           console.log('Card data fetched:', card);
 
           // Get the actual cover image URL (if any)
@@ -21,19 +21,26 @@ TrelloPowerUp.initialize({
             coverUrl = card.cover.url;
           }
 
-          const url =
-            'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
-            'name=' + encodeURIComponent(card.name) +
-            '&desc=' + encodeURIComponent(card.desc) +
-            (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '');
+          // Now, get the members info by IDs
+          return t.members('id', 'fullName', 'avatarUrl').then(members => {
+            // Only include members that are assigned to this card
+            const cardMembers = members.filter(m => (card.idMembers || []).includes(m.id));
+            const url =
+              'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
+              'name=' + encodeURIComponent(card.name) +
+              '&desc=' + encodeURIComponent(card.desc) +
+              (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
+              (card.due ? '&due=' + encodeURIComponent(card.due) : '') +
+              '&members=' + encodeURIComponent(JSON.stringify(cardMembers));
 
-          console.log('Opening modal with URL:', url);
-          return t.modal({
-            url,
-            title: 'Print Card',
-            height: 500,
-            width: 880,
-            fullscreen: false
+            console.log('Opening modal with URL:', url);
+            return t.modal({
+              url,
+              title: 'Print Card',
+              height: 500,
+              width: 880,
+              fullscreen: false
+            });
           });
         });
       }
