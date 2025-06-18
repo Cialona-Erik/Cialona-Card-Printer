@@ -1,4 +1,5 @@
 console.log('client.js loaded - TrelloPowerUp initialize starting');
+console.log('client.js loaded (initialize)');
 
 TrelloPowerUp.initialize({
   'card-buttons': function(t) {
