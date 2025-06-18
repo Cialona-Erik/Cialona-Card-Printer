@@ -14,7 +14,7 @@
       }
     ],
     "card-back-section": {
-      "title": "Print this Card — Cialona",
+      "title": "Print this Card - Powered by E.Zwart",
       "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
       "content": {
         "type": "iframe",
@@ -27,5 +27,7 @@
       "height": 100
     }
   },
+  "connectors": {},
+  "permissions": [],
   "version": "1.0"
 }
