@@ -9,8 +9,8 @@ TrelloPowerUp.initialize({
       condition: 'edit',
       callback: function(t) {
         console.log('Print Card button clicked');
-        // Get name, desc, and cover from card
-        return t.card('name', 'desc', 'cover').then(card => {
+        // Get all needed card fields
+        return t.card('name', 'desc', 'cover', 'due', 'members').then(card => {
           console.log('Card data fetched:', card);
 
           // Get the actual cover image URL (if any)
@@ -21,11 +21,19 @@ TrelloPowerUp.initialize({
             coverUrl = card.cover.url;
           }
 
+          // Prepare due date and members for URL
+          const due = card.due ? card.due : '';
+          const members = (card.members && card.members.length)
+            ? JSON.stringify(card.members.map(m => ({ fullName: m.fullName, avatarUrl: m.avatarUrl })))
+            : '';
+
           const url =
             'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
             'name=' + encodeURIComponent(card.name) +
             '&desc=' + encodeURIComponent(card.desc) +
-            (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '');
+            (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
+            (due ? '&due=' + encodeURIComponent(due) : '') +
+            (members ? '&members=' + encodeURIComponent(members) : '');
 
           console.log('Opening modal with URL:', url);
           return t.modal({
