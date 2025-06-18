@@ -55,6 +55,7 @@ TrelloPowerUp.initialize({
   },
 
 'card-back-section': function(t) {
+  console.log('card-back-section handler called');
   return {
     title: 'Print this card',
     icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
