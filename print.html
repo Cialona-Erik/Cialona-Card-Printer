@@ -25,7 +25,7 @@
     /* --- Print Button Styles --- */
     .print-btn {
       display: block;
-      margin: 28px auto 18px auto;                       /* Centered with spacing */
+      margin: 28px auto 12px auto;                       /* Centered with spacing (less below, more above) */
       padding: 11px 34px;                                /* Button size */
       font-size: 1.1em;
       background: #26044e;                               /* Cialona brand color */
@@ -39,6 +39,15 @@
     }
     .print-btn:hover {
       background: #5d43a7;                               /* Slightly lighter on hover */
+    }
+    /* --- Cialona Logo (top center) --- */
+    .cialona-logo {
+      height: 44px;
+      max-width: 120px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 10px auto; /* Centered, 10px below for gap to meta row */
+      filter: drop-shadow(0 2px 8px #e0e0e0);
     }
     /* --- Meta Row: Members and Due Date --- */
     .card-meta-row {
@@ -103,15 +112,6 @@
       min-width: 112px;
       text-align: right;
     }
-    /* --- Cialona Logo --- */
-    .cialona-logo {
-      height: 44px;
-      max-width: 120px;
-      object-fit: contain;
-      display: block;
-      margin: 30px auto 8px auto; /* Centered at top, add top/bottom spacing */
-      filter: drop-shadow(0 2px 8px #e0e0e0);
-    }
     /* --- Cover Image --- */
     .card-cover {
       width: 100%;
@@ -157,11 +157,11 @@
 </head>
 <body>
   <div class="card-print">
-    <!-- Cialona Logo: now at the top center of card -->
-    <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
-    
     <!-- Print Button (hidden in print view) -->
     <button class="print-btn" onclick="window.print()">Print this Card</button>
+
+    <!-- Cialona Logo at the top, centered -->
+    <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
     
     <!-- Meta Row: Avatars/Names (left), Due Date (right) -->
     <div class="card-meta-row">
