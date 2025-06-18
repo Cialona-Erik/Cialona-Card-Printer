@@ -67,6 +67,25 @@
       border: 2px solid #fff;
       box-shadow: 0 2px 6px #e6e8ea;
     }
+    /* --- New: Member Initials Avatar --- */
+    .member-avatar.initials {
+      background: #B3BAC5; /* Trello default grey (or pick a soft blue/green) */
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1em;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 5px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px #e6e8ea;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
     .member-name {
       font-size: 1em;
       color: #222;
@@ -85,14 +104,14 @@
       text-align: right;
     }
     /* --- Cialona Logo --- */
-  .cialona-logo {
-  height: 44px;
-  max-width: 120px;
-  object-fit: contain;
-  display: block;
-  margin: 0 14px;
-  filter: drop-shadow(0 2px 8px #e0e0e0);
-}
+    .cialona-logo {
+      height: 44px;
+      max-width: 120px;
+      object-fit: contain;
+      display: block;
+      margin: 0 14px;
+      filter: drop-shadow(0 2px 8px #e0e0e0);
+    }
     /* --- Cover Image --- */
     .card-cover {
       width: 100%;
@@ -141,14 +160,12 @@
     <!-- Print Button (hidden in print view) -->
     <button class="print-btn" onclick="window.print()">Print this Card</button>
     
-    <!-- Meta Row: Avatars/Names (left), Due Date (right) -->
+    <!-- Meta Row: Avatars/Names (left), Cialona logo (center), Due Date (right) -->
     <div class="card-meta-row">
       <div class="card-members" id="members"></div>      <!-- Avatars/names upper left -->
-        <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
+      <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
       <div class="card-due" id="due"></div>              <!-- Due date upper right -->
     </div>
-    
-
     
     <!-- Cover Image (set via JS if present) -->
     <img id="cover" class="card-cover" />
@@ -186,16 +203,25 @@
       if (Array.isArray(members) && members.length) {
         members.forEach(m => {
           // For each member, add avatar (or fallback) and name
-          let img = '';
+          let avatarHTML = '';
           if (m.avatarUrl) {
             // If avatar available, show image (170px thumb)
-            img = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`;
+            avatarHTML = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`;
+          } else if (m.fullName) {
+            // Show initials if no avatarUrl, Trello style
+            const initials = m.fullName
+              .split(' ')
+              .map(w => w[0])
+              .join('')
+              .toUpperCase()
+              .slice(0, 2); // Max 2 chars
+            avatarHTML = `<span class="member-avatar initials">${initials}</span>`;
           } else {
             // Otherwise, show a blank avatar circle
-            img = `<span class="member-avatar" style="background:#ccc;"></span>`;
+            avatarHTML = `<span class="member-avatar" style="background:#ccc;"></span>`;
           }
           // Add both avatar and name to meta row
-          membersDiv.innerHTML += img + `<span class="member-name">${m.fullName}</span>`;
+          membersDiv.innerHTML += avatarHTML + `<span class="member-name">${m.fullName || ''}</span>`;
         });
       }
     }
