@@ -5,28 +5,11 @@
   "icon": {
     "url": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
   },
-  "capabilities": {
-    "card-back-section": {
-      "title": "Card Tools",
-      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
-      "content": {
-        "type": "iframe",
-        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
-        "height": 50
-      }
-    },
-    "card-buttons": [
-      {
-        "text": "Print Card",
-        "callback": "printCard",
-        "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
-      }
-    ],
-    "show-settings": {
-      "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
-      "height": 100
-    }
-  },
+  "capabilities": [
+    "card-back-section",
+    "card-buttons",
+    "show-settings"
+  ],
   "connectors": {},
   "permissions": [],
   "version": "1.0"
