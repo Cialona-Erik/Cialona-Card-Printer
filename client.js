@@ -63,7 +63,7 @@ TrelloPowerUp.initialize({
       content: {
         type: 'iframe',
         url: 'https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html',
-        height: 50
+        height: 60
       }
     };
   }
