@@ -47,46 +47,57 @@
   <script>
     const t = TrelloPowerUp.iframe();
 
-    // Ensure Trello renders iframe correctly
     t.render(() => {
-      // Attach event after rendering completes
-      document.getElementById('cardPrint').onclick = function () {
-        t.card('name', 'desc', 'cover', 'due', 'members').then(function (card) {
-          let coverUrl = '';
-          if (card.cover?.sharedSourceUrl) {
-            coverUrl = card.cover.sharedSourceUrl;
-          } else if (card.cover?.url) {
-            coverUrl = card.cover.url;
-          }
+      const btn = document.getElementById('cardPrint');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          t.card('name', 'desc', 'cover', 'due', 'members').then(card => {
+            let coverUrl = '';
+            if (card.cover?.sharedSourceUrl) {
+              coverUrl = card.cover.sharedSourceUrl;
+            } else if (card.cover?.url) {
+              coverUrl = card.cover.url;
+            }
 
-          const due = card.due || '';
-          const members = card.members?.length
-            ? JSON.stringify(card.members.map(m => ({
-                fullName: m.fullName,
-                avatarUrl: m.avatarUrl
-              })))
-            : '';
+            const due = card.due || '';
+            const members = card.members?.length
+              ? JSON.stringify(card.members.map(m => ({
+                  fullName: m.fullName,
+                  avatarUrl: m.avatarUrl
+                })))
+              : '';
 
-          const url =
-            'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
-            'name=' + encodeURIComponent(card.name) +
-            '&desc=' + encodeURIComponent(card.desc) +
-            (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
-            (due ? '&due=' + encodeURIComponent(due) : '') +
-            (members ? '&members=' + encodeURIComponent(members) : '');
+            const url =
+              'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
+              'name=' + encodeURIComponent(card.name) +
+              '&desc=' + encodeURIComponent(card.desc) +
+              (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
+              (due ? '&due=' + encodeURIComponent(due) : '') +
+              (members ? '&members=' + encodeURIComponent(members) : '');
 
-          // Important: sign the URL before launching
-          t.signUrl(url).then(signedUrl => {
-            t.modal({
-              url: signedUrl,
-              title: 'Print Card - Powered by E.Zwart',
-              height: 500,
-              width: 880,
-              fullscreen: false
-            });
+            // Open modal (signUrl is optional)
+            if (typeof t.signUrl === 'function') {
+              t.signUrl(url).then(signed => {
+                t.modal({
+                  url: signed,
+                  title: 'Print Card - Powered by E.Zwart',
+                  height: 500,
+                  width: 880,
+                  fullscreen: false
+                });
+              });
+            } else {
+              t.modal({
+                url: url,
+                title: 'Print Card - Powered by E.Zwart',
+                height: 500,
+                width: 880,
+                fullscreen: false
+              });
+            }
           });
         });
-      };
+      }
     });
   </script>
 </body>
