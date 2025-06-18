@@ -109,7 +109,7 @@
       max-width: 120px;
       object-fit: contain;
       display: block;
-      margin: 0 14px;
+      margin: 30px auto 8px auto; /* Centered at top, add top/bottom spacing */
       filter: drop-shadow(0 2px 8px #e0e0e0);
     }
     /* --- Cover Image --- */
@@ -157,13 +157,15 @@
 </head>
 <body>
   <div class="card-print">
+    <!-- Cialona Logo: now at the top center of card -->
+    <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
+    
     <!-- Print Button (hidden in print view) -->
     <button class="print-btn" onclick="window.print()">Print this Card</button>
     
-    <!-- Meta Row: Avatars/Names (left), Cialona logo (center), Due Date (right) -->
+    <!-- Meta Row: Avatars/Names (left), Due Date (right) -->
     <div class="card-meta-row">
       <div class="card-members" id="members"></div>      <!-- Avatars/names upper left -->
-      <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
       <div class="card-due" id="due"></div>              <!-- Due date upper right -->
     </div>
     
