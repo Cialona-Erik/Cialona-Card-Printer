@@ -32,9 +32,8 @@
       gap: 8px;
     }
     .print-btn:hover {
-     // background: #5d43a7;
-      background: #ffffff;
-      
+      background: #5d43a7;
+      // background: #ffffff;
     }
   </style>
 </head>
@@ -53,8 +52,8 @@
 
     t.render(() => {
       console.log('Trello iframe rendered');
-      const btn = document.getElementById('cardPrint');
 
+      const btn = document.getElementById('cardPrint');
       if (!btn) {
         console.error('Print button not found in DOM');
         return;
@@ -63,60 +62,54 @@
       btn.addEventListener('click', () => {
         console.log('Print button clicked');
 
-        t.card('name', 'desc', 'cover', 'due', 'members').then(card => {
-          console.log('Card data:', card);
+        t.card('name', 'desc', 'cover', 'due', 'members')
+          .then(card => {
+            console.log('Card data:', card);
 
-          let coverUrl = '';
-          if (card.cover?.sharedSourceUrl) {
-            coverUrl = card.cover.sharedSourceUrl;
-          } else if (card.cover?.url) {
-            coverUrl = card.cover.url;
-          }
+            let coverUrl = '';
+            if (card.cover?.sharedSourceUrl) {
+              coverUrl = card.cover.sharedSourceUrl;
+            } else if (card.cover?.url) {
+              coverUrl = card.cover.url;
+            }
 
-          const due = card.due || '';
-          const members = card.members?.length
-            ? JSON.stringify(card.members.map(m => ({
-                fullName: m.fullName,
-                avatarUrl: m.avatarUrl
-              })))
-            : '';
+            const due = card.due || '';
+            const members = card.members?.length
+              ? JSON.stringify(card.members.map(m => ({
+                  fullName: m.fullName,
+                  avatarUrl: m.avatarUrl
+                })))
+              : '';
 
-          const baseUrl = 'https://cialona-erik.github.io/Cialona-Card-Printer/print.html';
-          const query =
-            'name=' + encodeURIComponent(card.name) +
-            '&desc=' + encodeURIComponent(card.desc) +
-            (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
-            (due ? '&due=' + encodeURIComponent(due) : '') +
-            (members ? '&members=' + encodeURIComponent(members) : '');
+            const baseUrl = 'https://cialona-erik.github.io/Cialona-Card-Printer/print.html';
+            const query =
+              'name=' + encodeURIComponent(card.name) +
+              '&desc=' + encodeURIComponent(card.desc) +
+              (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
+              (due ? '&due=' + encodeURIComponent(due) : '') +
+              (members ? '&members=' + encodeURIComponent(members) : '');
 
-          const fullUrl = `${baseUrl}?${query}`;
+            const fullUrl = `${baseUrl}?${query}`;
+            console.log('Constructed URL:', fullUrl);
 
-          if (typeof t.signUrl === 'function') {
-            t.signUrl(fullUrl).then(signedUrl => {
-              console.log('Opening signed modal:', signedUrl);
-              t.modal({
-                url: signedUrl,
-                title: 'Print Card - Powered by E.Zwart',
-                height: 500,
-                width: 880,
-                fullscreen: false
+            t.signUrl(fullUrl)
+              .then(signedUrl => {
+                console.log('Signed URL:', signedUrl);
+                return t.modal({
+                  url: signedUrl,
+                  title: 'Print Card - Powered by E.Zwart',
+                  height: 500,
+                  width: 880,
+                  fullscreen: false
+                });
+              })
+              .catch(err => {
+                console.error('Error signing URL or opening modal:', err);
               });
-            }).catch(err => {
-              console.error('Error signing URL:', err);
-            });
-          } else {
-            console.log('Opening unsigned modal:', fullUrl);
-            t.modal({
-              url: fullUrl,
-              title: 'Print Card - Powered by E.Zwart',
-              height: 500,
-              width: 880,
-              fullscreen: false
-            });
-          }
-        }).catch(err => {
-          console.error('Error retrieving card data:', err);
-        });
+          })
+          .catch(err => {
+            console.error('Error fetching card data:', err);
+          });
       });
     });
   </script>
