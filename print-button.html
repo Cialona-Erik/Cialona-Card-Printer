@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <style>
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: none;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
     .print-inline-btn {
       display: flex;
@@ -34,11 +34,6 @@
     .print-btn:hover {
       background: #5d43a7;
     }
-    .print-icon {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-    }
   </style>
 </head>
 <body>
@@ -49,11 +44,15 @@
   </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
+    // --- BEGIN DEBUG LOGGING ---
+    console.log('print-button.html loaded');
+    // --- END DEBUG LOGGING ---
     // Get Power-Up iframe context
     var t = TrelloPowerUp.iframe();
     document.getElementById('cardPrint').onclick = function() {
-      // Fetch card data (just like your main Power-Up button)
+      console.log('Print button clicked');
       t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
+        console.log('Card data:', card);
         let coverUrl = '';
         if (card.cover && card.cover.sharedSourceUrl) {
           coverUrl = card.cover.sharedSourceUrl;
@@ -74,7 +73,7 @@
           (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
           (due ? '&due=' + encodeURIComponent(due) : '') +
           (members ? '&members=' + encodeURIComponent(members) : '');
-        // Open modal using Power-Up API
+        console.log('Opening modal with URL:', url);
         return t.modal({
           url,
           title: 'Print Card - Cialona - Powered by E.Zwart',
