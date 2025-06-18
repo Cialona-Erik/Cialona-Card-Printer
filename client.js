@@ -53,4 +53,3 @@ TrelloPowerUp.initialize({
     };
   }
 });
-
