@@ -45,6 +45,46 @@
       display: none;
       background: #e5e8f0;
     }
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 18px 30px 0 30px;
+      min-height: 48px;
+      gap: 18px;
+    }
+    .card-members {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .member-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #eee;
+      object-fit: cover;
+      display: inline-block;
+      margin-right: 5px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px #e6e8ea;
+    }
+    .member-name {
+      font-size: 1em;
+      color: #222;
+      margin-right: 12px;
+      font-weight: 600;
+    }
+    .card-due {
+      font-size: 1em;
+      color: #246fe0;
+      background: #e8f0fd;
+      border-radius: 6px;
+      padding: 6px 16px;
+      font-weight: 500;
+      min-width: 112px;
+      text-align: right;
+    }
     .card-content {
       padding: 10px 10px 0 10px;
     }
@@ -56,44 +96,6 @@
       margin-bottom: 8px;
       text-align: left;
       word-break: break-word;
-    }
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      margin-bottom: 20px;
-      min-height: 40px;
-    }
-    .card-due {
-      font-size: 1em;
-      color: #246fe0;
-      background: #e8f0fd;
-      border-radius: 6px;
-      padding: 5px 13px;
-      font-weight: 500;
-      margin-right: 10px;
-    }
-    .card-members {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .member-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #eee;
-      object-fit: cover;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 5px;
-      border: 1.5px solid #fff;
-      box-shadow: 0 2px 6px #e6e8ea;
-    }
-    .member-name {
-      font-size: 0.93em;
-      color: #222;
-      margin-right: 15px;
     }
     .card-desc {
       margin-bottom: 28px;
@@ -116,12 +118,12 @@
   <div class="card-print">
     <button class="print-btn" onclick="window.print()">Print this Card</button>
     <img id="cover" class="card-cover" />
+    <div class="card-meta-row">
+      <div class="card-members" id="members"></div>
+      <div class="card-due" id="due"></div>
+    </div>
     <div class="card-content">
       <div class="card-title" id="title"></div>
-      <div class="card-meta">
-        <span id="due" class="card-due"></span>
-        <span id="members" class="card-members"></span>
-      </div>
       <div class="card-desc" id="desc"></div>
     </div>
   </div>
@@ -139,18 +141,6 @@
       cover.style.display = 'block';
     }
 
-    // Set the card title
-    document.getElementById('title').textContent = params.get('name') || 'No Title';
-
-    // --- Due date ---
-    const dueRaw = params.get('due');
-    if (dueRaw) {
-      const date = new Date(dueRaw);
-      // Nice format (e.g., Jun 20, 2025 15:00)
-      const options = { year: 'numeric', month: 'short', day: 'numeric', hour:'2-digit', minute:'2-digit' };
-      document.getElementById('due').textContent = "Due: " + date.toLocaleString(undefined, options);
-    }
-
     // --- Members ---
     const membersRaw = params.get('members');
     if (membersRaw) {
@@ -161,7 +151,6 @@
       const membersDiv = document.getElementById('members');
       if (Array.isArray(members) && members.length) {
         members.forEach(m => {
-          // Show avatar and name
           let img = '';
           if (m.avatarUrl) {
             img = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`;
@@ -172,6 +161,17 @@
         });
       }
     }
+
+    // --- Due date ---
+    const dueRaw = params.get('due');
+    if (dueRaw) {
+      const date = new Date(dueRaw);
+      const options = { year: 'numeric', month: 'short', day: 'numeric', hour:'2-digit', minute:'2-digit' };
+      document.getElementById('due').textContent = "Due: " + date.toLocaleString(undefined, options);
+    }
+
+    // Set the card title
+    document.getElementById('title').textContent = params.get('name') || 'No Title';
 
     // Render the description as Markdown
     const desc = params.get('desc') || '';
