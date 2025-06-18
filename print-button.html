@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <style>
-    body { margin:0; padding:0; background:none; font-family: 'Segoe UI', Arial, sans-serif; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: none;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
     .print-inline-btn {
-      display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
     }
     .print-btn {
       background: #26044e;
@@ -22,26 +31,35 @@
       align-items: center;
       gap: 8px;
     }
-    .print-btn:hover { background: #5d43a7; }
-    .print-icon { width: 20px; height: 20px; vertical-align: middle; }
+    .print-btn:hover {
+      background: #5d43a7;
+    }
+    .print-icon {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body>
   <div class="print-inline-btn">
     <button class="print-btn" id="cardPrint">
-       Print this card
+      <img class="print-icon" src="https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg" alt="Print">
+      Print this card
     </button>
   </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
-    // Trello Power-Up context
+    // --- Must be Trello Power-Up iframe context!
     var t = TrelloPowerUp.iframe();
     document.getElementById('cardPrint').onclick = function() {
-      // Get card data and open print modal, just like your main Power-Up button
-      t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
+      return t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
         let coverUrl = '';
-        if (card.cover && card.cover.sharedSourceUrl) coverUrl = card.cover.sharedSourceUrl;
-        else if (card.cover && card.cover.url) coverUrl = card.cover.url;
+        if (card.cover && card.cover.sharedSourceUrl) {
+          coverUrl = card.cover.sharedSourceUrl;
+        } else if (card.cover && card.cover.url) {
+          coverUrl = card.cover.url;
+        }
         const due = card.due ? card.due : '';
         const members = (card.members && card.members.length)
           ? JSON.stringify(card.members.map(m => ({ fullName: m.fullName, avatarUrl: m.avatarUrl })))
