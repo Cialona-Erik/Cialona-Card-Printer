@@ -2,21 +2,80 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Print Card</title>
+  <title>Print Trello Card</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    h1 { margin-bottom: 10px; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f8fafc;
+      padding: 40px 0;
+    }
+    .card-print {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px 0 #c1c9d6;
+      text-align: left;
+      position: relative;
+    }
+    .card-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 18px;
+      color: #246fe0;
+      letter-spacing: .5px;
+    }
+    .card-desc {
+      margin-bottom: 28px;
+      color: #313947;
+      font-size: 1.12em;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+    .print-btn {
+      display: block;
+      margin: 0 auto;
+      margin-top: 24px;
+      padding: 10px 30px;
+      font-size: 1em;
+      background: #246fe0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #e2e6ed;
+      transition: background .18s;
+    }
+    .print-btn:hover {
+      background: #1d5eb7;
+    }
+    @media print {
+      .print-btn { display: none; }
+      body { background: #fff; }
+      .card-print {
+        box-shadow: none;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1 id="card-title"></h1>
-  <p id="card-desc"></p>
-  <button onclick="window.print()">Print</button>
-
+  <div class="card-print">
+    <div class="card-title" id="title"></div>
+    <div class="card-desc" id="desc"></div>
+    <button class="print-btn" onclick="window.print()">Print</button>
+  </div>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
+    var t = TrelloPowerUp.iframe();
     const params = new URLSearchParams(window.location.search);
-    document.getElementById('card-title').innerText = params.get('name') || 'No Title';
-    document.getElementById('card-desc').innerText = params.get('desc') || 'No Description';
+    document.getElementById('title').textContent = params.get('name') || 'No Title';
+    document.getElementById('desc').textContent = params.get('desc') || 'No Description';
+
+    t.render(() => {
+      t.sizeTo('.card-print').done();
+    });
   </script>
 </body>
 </html>
