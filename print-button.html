@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <style>
     body {
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: none;
-      font-family: 'Segoe UI', Arial, sans-serif;
     }
     .print-inline-btn {
       display: flex;
@@ -44,15 +44,17 @@
 <body>
   <div class="print-inline-btn">
     <button class="print-btn" id="cardPrint">
+      <img class="print-icon" src="https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg" alt="Print">
       Print this card
     </button>
   </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
-    // --- Must be Trello Power-Up iframe context!
+    // Get Power-Up iframe context
     var t = TrelloPowerUp.iframe();
     document.getElementById('cardPrint').onclick = function() {
-      return t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
+      // Fetch card data (just like your main Power-Up button)
+      t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
         let coverUrl = '';
         if (card.cover && card.cover.sharedSourceUrl) {
           coverUrl = card.cover.sharedSourceUrl;
@@ -61,7 +63,10 @@
         }
         const due = card.due ? card.due : '';
         const members = (card.members && card.members.length)
-          ? JSON.stringify(card.members.map(m => ({ fullName: m.fullName, avatarUrl: m.avatarUrl })))
+          ? JSON.stringify(card.members.map(m => ({
+              fullName: m.fullName,
+              avatarUrl: m.avatarUrl
+            })))
           : '';
         const url =
           'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
@@ -70,6 +75,7 @@
           (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
           (due ? '&due=' + encodeURIComponent(due) : '') +
           (members ? '&members=' + encodeURIComponent(members) : '');
+        // Open modal using Power-Up API
         return t.modal({
           url,
           title: 'Print Card - Cialona - Powered by E.Zwart',
