@@ -15,13 +15,13 @@
       }
     ],
     "card-back-section": {
-      "title": "Print this Card - Powered by E.Zwart",
+      "title": "Check Signed Context",
       "icon": "https://super-moxie-650636.netlify.app/Print-Button.svg",
       "content": {
         "type": "iframe",
-        "url": "https://super-moxie-650636.netlify.app/print-button.html",
+        "url": "https://super-moxie-650636.netlify.app/check.html",
         "signed": true,
-        "height": 60
+        "height": 100
       }
     },
     "show-settings": {
