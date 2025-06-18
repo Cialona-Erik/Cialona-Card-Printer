@@ -32,8 +32,8 @@
       gap: 8px;
     }
     .print-btn:hover {
-      background: #5d43a7;
-      // background: #ffffff;
+      // background: #5d43a7;
+      background: #ffffff;
     }
   </style>
 </head>
@@ -48,7 +48,8 @@
   <script>
     console.log('print-button.html loaded');
 
-    const t = TrelloPowerUp.iframe();
+    // Use full iframe URL so Trello treats it as signed
+    const t = TrelloPowerUp.iframe({ url: window.location.href });
 
     t.render(() => {
       console.log('Trello iframe rendered');
