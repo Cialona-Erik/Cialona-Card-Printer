@@ -10,16 +10,32 @@ TrelloPowerUp.initialize({
       condition: 'edit',
       callback: function(t) {
         console.log('Print Card button clicked');
-        return t.card('name', 'desc').then(card => {
-          console.log('Card data fetched:', card);
-          const url = `https://cialona-erik.github.io/Cialona-Card-Printer/print.html?name=${encodeURIComponent(card.name)}&desc=${encodeURIComponent(card.desc)}`;
-          return t.modal({
-            url: url,
-            title: 'Print Card',
-            height: 500,
-            fullscreen: false
+        return t.card('name', 'desc', 'cover')
+          .then(card => {
+            console.log('Card data fetched:', card);
+
+            // Find the actual image URL from the cover object (if any)
+            let coverUrl = '';
+            if (card.cover && card.cover.sharedSourceUrl) {
+              coverUrl = card.cover.sharedSourceUrl;
+            } else if (card.cover && card.cover.url) {
+              coverUrl = card.cover.url;
+            }
+
+            const url =
+              'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
+              'name=' + encodeURIComponent(card.name) +
+              '&desc=' + encodeURIComponent(card.desc) +
+              (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '');
+
+            console.log('Opening modal with URL:', url);
+            return t.modal({
+              url,
+              title: 'Print Card',
+              height: 500,
+              fullscreen: false
+            });
           });
-        });
       }
     }];
   },
