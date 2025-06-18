@@ -42,47 +42,44 @@
       Print this card
     </button>
   </div>
-  <script src="https://p.trellocdn.com/power-up.min.js"></script>
-  <script>
-    // --- BEGIN DEBUG LOGGING ---
-    console.log('print-button.html loaded');
-    // --- END DEBUG LOGGING ---
-    // Get Power-Up iframe context
-    var t = TrelloPowerUp.iframe();
-    document.getElementById('cardPrint').onclick = function() {
-      console.log('Print button clicked');
-      t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
-        console.log('Card data:', card);
-        let coverUrl = '';
-        if (card.cover && card.cover.sharedSourceUrl) {
-          coverUrl = card.cover.sharedSourceUrl;
-        } else if (card.cover && card.cover.url) {
-          coverUrl = card.cover.url;
-        }
-        const due = card.due ? card.due : '';
-        const members = (card.members && card.members.length)
-          ? JSON.stringify(card.members.map(m => ({
-              fullName: m.fullName,
-              avatarUrl: m.avatarUrl
-            })))
-          : '';
-        const url =
-          'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
-          'name=' + encodeURIComponent(card.name) +
-          '&desc=' + encodeURIComponent(card.desc) +
-          (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
-          (due ? '&due=' + encodeURIComponent(due) : '') +
-          (members ? '&members=' + encodeURIComponent(members) : '');
-        console.log('Opening modal with URL:', url);
+<script src="https://p.trellocdn.com/power-up.min.js"></script>
+<script>
+  var t = TrelloPowerUp.iframe();
+  document.getElementById('cardPrint').onclick = function() {
+    t.card('name', 'desc', 'cover', 'due', 'members').then(function(card) {
+      let coverUrl = '';
+      if (card.cover && card.cover.sharedSourceUrl) {
+        coverUrl = card.cover.sharedSourceUrl;
+      } else if (card.cover && card.cover.url) {
+        coverUrl = card.cover.url;
+      }
+      const due = card.due ? card.due : '';
+      const members = (card.members && card.members.length)
+        ? JSON.stringify(card.members.map(m => ({
+            fullName: m.fullName,
+            avatarUrl: m.avatarUrl
+          })))
+        : '';
+      const url =
+        'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
+        'name=' + encodeURIComponent(card.name) +
+        '&desc=' + encodeURIComponent(card.desc) +
+        (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
+        (due ? '&due=' + encodeURIComponent(due) : '') +
+        (members ? '&members=' + encodeURIComponent(members) : '');
+      
+      // 👇 THIS IS THE KEY: Sign the URL before opening modal!
+      t.signUrl(url).then(function(signedUrl) {
         return t.modal({
-          url,
-          title: 'Print Card - Cialona - Powered by E.Zwart',
+          url: signedUrl,
+          title: 'Print Card - Powered by E.Zwart',
           height: 500,
           width: 880,
           fullscreen: false
         });
       });
-    };
-  </script>
+    });
+  };
+</script>
 </body>
 </html>
