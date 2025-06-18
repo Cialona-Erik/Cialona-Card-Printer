@@ -4,58 +4,63 @@
   <meta charset="utf-8" />
   <title>Print Trello Card</title>
   <style>
+    /* --- Global Page Styles --- */
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f4f6fa;
-      padding: 40px 0;
+      font-family: 'Segoe UI', Arial, sans-serif;        /* Use modern, readable font */
+      background: #f4f6fa;                               /* Soft, Trello-like background */
+      padding: 40px 0;                                   /* Top and bottom padding */
     }
+    /* --- Main Card Container --- */
     .card-print {
-      max-width: 800px;
-      margin: 0 auto;
+      max-width: 800px;                                  /* Main card width */
+      margin: 0 auto;                                    /* Center on page */
       padding: 0 0 30px 0;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 6px 24px 0 #c1c9d6;
+      background: #fff;                                  /* White card background */
+      border-radius: 16px;                               /* Rounded corners */
+      box-shadow: 0 6px 24px 0 #c1c9d6;                 /* Soft shadow for depth */
       text-align: left;
       position: relative;
       overflow: hidden;
     }
+    /* --- Print Button Styles --- */
     .print-btn {
       display: block;
-      margin: 28px auto 18px auto;
-      padding: 11px 34px;
+      margin: 28px auto 18px auto;                       /* Centered with spacing */
+      padding: 11px 34px;                                /* Button size */
       font-size: 1.1em;
-      background: #26044e;
-      color: #f79a14;
+      background: #26044e;                               /* Cialona brand color */
+      color: #f79a14;                                    /* Cialona accent color */
       font-weight: 700;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 2px 8px #ffff;
+      box-shadow: 0 2px 8px #ffff;                       /* Subtle shadow */
       transition: background .18s;
     }
     .print-btn:hover {
-      background: #5d43a7;
+      background: #5d43a7;                               /* Slightly lighter on hover */
     }
+    /* --- Meta Row: Members and Due Date --- */
     .card-meta-row {
-      display: flex;
-      justify-content: space-between;
+      display: flex;                                     /* Arrange children in a row */
+      justify-content: space-between;                    /* Members left, due right */
       align-items: center;
-      padding: 16px 10px 10px 10px;
+      padding: 16px 10px 10px 10px;                      /* Spacing around content */
       min-height: 48px;
       gap: 18px;
-      background: #fff;
+      background: #fff;                                  /* Same as card for continuity */
     }
+    /* --- Members Avatar/Name Styles --- */
     .card-members {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 7px;                                          /* Gap between avatars/names */
     }
     .member-avatar {
       width: 36px;
       height: 36px;
-      border-radius: 50%;
-      background: #eee;
+      border-radius: 50%;                                /* Circle avatar */
+      background: #eee;                                  /* Fallback background */
       object-fit: cover;
       display: inline-block;
       margin-right: 5px;
@@ -68,43 +73,42 @@
       margin-right: 12px;
       font-weight: 600;
     }
+    /* --- Due Date Badge --- */
     .card-due {
       font-size: 1em;
       color: #000000;
-      background: #f7f8fa;
+      background: #f7f8fa;                               /* Soft grey badge bg */
       border-radius: 6px;
       padding: 6px 16px;
       font-weight: 500;
       min-width: 112px;
       text-align: right;
     }
-    .cialona-logo-row {
-      text-align: center;
-      background: #f6f7fa;
-      padding: 18px 0 12px 0;
-    }
-    .cialona-logo {
-      height: 50px;
-      max-width: 180px;
-      object-fit: contain;
-      display: inline-block;
-      filter: drop-shadow(0 2px 8px #e0e0e0);
-      margin-bottom: 4px;
-    }
+    /* --- Cialona Logo --- */
+  .cialona-logo {
+  height: 44px;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+  margin: 0 14px;
+  filter: drop-shadow(0 2px 8px #e0e0e0);
+}
+    /* --- Cover Image --- */
     .card-cover {
       width: 100%;
       height: 300px;
-      object-fit: contain;
+      object-fit: contain;                               /* Contain image in box */
       object-position: center center;
-      display: none;
-      background: #e5e8f0;
+      display: none;                                     /* JS will set display:block if image */
+      background: #e5e8f0;                               /* Soft fallback bg */
       margin-bottom: 0;
     }
+    /* --- Card Content Section (title/desc) --- */
     .card-content {
       padding: 10px 10px 0 10px;
     }
     .card-title {
-      font-size: 1.5em;
+      font-size: 1.5em;                                  /* Title size */
       font-weight: 500;
       color: #000000;
       letter-spacing: 0.2px;
@@ -119,6 +123,7 @@
       line-height: 1.7;
       min-height: 32px;
     }
+    /* --- Print Media: Remove Shadows, Hide Button --- */
     @media print {
       .print-btn { display: none; }
       body { background: #fff; }
@@ -133,76 +138,87 @@
 </head>
 <body>
   <div class="card-print">
+    <!-- Print Button (hidden in print view) -->
     <button class="print-btn" onclick="window.print()">Print this Card</button>
     
+    <!-- Meta Row: Avatars/Names (left), Due Date (right) -->
     <div class="card-meta-row">
-      <div class="card-members" id="members"></div>
-      <div class="card-due" id="due"></div>
+      <div class="card-members" id="members"></div>      <!-- Avatars/names upper left -->
+        <img src="https://cialona-erik.github.io/Cialona-Card-Printer/Cialona-logo-EN-scaled.png" class="cialona-logo" alt="Cialona Logo" />
+      <div class="card-due" id="due"></div>              <!-- Due date upper right -->
     </div>
     
-    <!-- Cialona logo centered above cover -->
-    <div class="cialona-logo-row">
-      <img src="https://cialona.com/assets/images/logo.png" class="cialona-logo" alt="Cialona Logo" />
-    </div>
+
     
+    <!-- Cover Image (set via JS if present) -->
     <img id="cover" class="card-cover" />
     
+    <!-- Main Card Content -->
     <div class="card-content">
-      <div class="card-title" id="title"></div>
-      <div class="card-desc" id="desc"></div>
+      <div class="card-title" id="title"></div>          <!-- Card title -->
+      <div class="card-desc" id="desc"></div>            <!-- Card description (Markdown) -->
     </div>
   </div>
+  <!-- Trello Power-Up and Markdown render libraries -->
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
+    // --- Trello Power-Up context for resizing modal ---
     var t = TrelloPowerUp.iframe();
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search); // Read all params
 
-    // Set the cover image if present
-    const coverUrl = params.get('cover');
+    // --- Cover Image ---
+    const coverUrl = params.get('cover'); // Cover image URL from query params
     if (coverUrl) {
       const cover = document.getElementById('cover');
-      cover.src = coverUrl;
-      cover.style.display = 'block';
+      cover.src = coverUrl;                // Set <img> src to cover
+      cover.style.display = 'block';       // Make visible if image exists
     }
 
-    // --- Members ---
-    const membersRaw = params.get('members');
+    // --- Members (avatars and names) ---
+    const membersRaw = params.get('members'); // Members JSON array (from URL param)
     if (membersRaw) {
       let members = [];
-      try { members = JSON.parse(membersRaw); } catch (e) {}
+      try {
+        members = JSON.parse(membersRaw);  // Parse stringified JSON array
+      } catch (e) { /* Fallback: ignore error if invalid JSON */ }
       const membersDiv = document.getElementById('members');
       if (Array.isArray(members) && members.length) {
         members.forEach(m => {
+          // For each member, add avatar (or fallback) and name
           let img = '';
           if (m.avatarUrl) {
+            // If avatar available, show image (170px thumb)
             img = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`;
           } else {
+            // Otherwise, show a blank avatar circle
             img = `<span class="member-avatar" style="background:#ccc;"></span>`;
           }
+          // Add both avatar and name to meta row
           membersDiv.innerHTML += img + `<span class="member-name">${m.fullName}</span>`;
         });
       }
     }
 
-    // --- Due date ---
-    const dueRaw = params.get('due');
+    // --- Due date (upper right) ---
+    const dueRaw = params.get('due'); // Due date string from params (ISO8601)
     if (dueRaw) {
-      const date = new Date(dueRaw);
+      const date = new Date(dueRaw); // Parse to JS date
+      // Format: e.g., Jun 20, 2025, 15:00
       const options = { year: 'numeric', month: 'short', day: 'numeric', hour:'2-digit', minute:'2-digit' };
       document.getElementById('due').textContent = "Due: " + date.toLocaleString(undefined, options);
     }
 
-    // Set the card title
+    // --- Card Title ---
     document.getElementById('title').textContent = params.get('name') || 'No Title';
 
-    // Render the description as Markdown
+    // --- Card Description (Markdown to HTML) ---
     const desc = params.get('desc') || '';
     document.getElementById('desc').innerHTML = marked.parse(desc);
 
-    // Resize modal for Trello Power-Up
+    // --- Resize Trello Modal to fit content ---
     t.render(() => {
-      t.sizeTo('.card-print').done();
+      t.sizeTo('.card-print').done(); // Let Trello size modal to card
     });
   </script>
 </body>
