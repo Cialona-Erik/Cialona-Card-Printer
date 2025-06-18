@@ -1,5 +1,7 @@
 console.log('client.js loaded - TrelloPowerUp initialize starting');
 
+const BASE_URL = 'https://super-moxie-650636.netlify.app';
+
 // Extract the print callback as a named function for manifest binding
 function printCard(t) {
   console.log('Print Card button clicked');
@@ -22,7 +24,7 @@ function printCard(t) {
       : '';
 
     const url =
-      'https://cialona-erik.github.io/Cialona-Card-Printer/print.html?' +
+      BASE_URL + '/print.html?' +
       'name=' + encodeURIComponent(card.name) +
       '&desc=' + encodeURIComponent(card.desc) +
       (coverUrl ? '&cover=' + encodeURIComponent(coverUrl) : '') +
@@ -45,7 +47,7 @@ TrelloPowerUp.initialize({
   'card-buttons': function(t) {
     console.log('card-buttons handler called');
     return [{
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
+      icon: BASE_URL + '/Print-Button.svg',
       text: 'Print this card',
       condition: 'edit',
       callback: printCard
@@ -53,17 +55,17 @@ TrelloPowerUp.initialize({
   },
 
   'printCard': printCard,
-'card-back-section': function(t) {
-  console.log('card-back-section handler called');
-  return {
-    title: 'Print this Card - Powered by E.Zwart',
-    icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
-    content: {
-      type: 'iframe',
-      url: 'https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html',
-      height: 60
-    }
-  };
-}
-  
+
+  'card-back-section': function(t) {
+    console.log('card-back-section handler called');
+    return {
+      title: 'Print this Card - Powered by E.Zwart',
+      icon: BASE_URL + '/Print-Button.svg',
+      content: {
+        type: 'iframe',
+        url: BASE_URL + '/print-button.html',
+        height: 60
+      }
+    };
+  }
 });
