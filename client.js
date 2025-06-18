@@ -5,7 +5,7 @@ TrelloPowerUp.initialize({
     console.log('card-buttons handler called');
     return [{
       icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
-      text: 'Print Card',
+      text: 'Print this card',
       condition: 'edit',
       callback: function(t) {
         console.log('Print Card button clicked');
@@ -38,7 +38,7 @@ TrelloPowerUp.initialize({
           console.log('Opening modal with URL:', url);
           return t.modal({
             url,
-            title: 'Print Card',
+            title: 'Print Card - Cialona - Powered by E.Zwart',
             height: 500,
             width: 880,
             fullscreen: false
