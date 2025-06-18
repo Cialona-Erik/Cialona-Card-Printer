@@ -1,30 +1,31 @@
+
 {
   "name": "Cialona-Card-Printer",
   "id": "cialona-card-printer",
   "author": "Erik Zwart - DodDes1gn",
   "icon": {
-    "url": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
+    "url": "https://super-moxie-650636.netlify.app/Print-Button.svg"
   },
   "capabilities": {
     "card-buttons": [
       {
         "text": "Print this card",
         "callback": "printCard",
-        "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
+        "icon": "https://super-moxie-650636.netlify.app/Print-Button.svg"
       }
     ],
     "card-back-section": {
       "title": "Print this Card - Powered by E.Zwart",
-      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
+      "icon": "https://super-moxie-650636.netlify.app/Print-Button.svg",
       "content": {
         "type": "iframe",
-        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html",
+        "url": "https://super-moxie-650636.netlify.app/print-button.html",
         "signed": true,
         "height": 60
       }
     },
     "show-settings": {
-      "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
+      "url": "https://super-moxie-650636.netlify.app/index.html",
       "height": 100
     }
   },
