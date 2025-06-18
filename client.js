@@ -55,14 +55,13 @@ TrelloPowerUp.initialize({
   },
 
 'card-back-section': function(t) {
-  console.log('card-back-section handler called');
   return {
-    title: 'Print this card',
-    icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg', // or your brand icon
+    title: '', // leave empty to remove bold header!
+    icon: '', // or remove this line for no icon
     content: {
       type: 'iframe',
-      url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html', // index.html is the content shown in the section
-      height: 60
+      url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html', // <--- MUST point to working file!
+      height: 68 // try a bit higher if not visible
     }
   };
 }
