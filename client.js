@@ -32,6 +32,7 @@ TrelloPowerUp.initialize({
             url,
             title: 'Print Card',
             height: 500,
+            width: 880,
             fullscreen: false
           });
         });
