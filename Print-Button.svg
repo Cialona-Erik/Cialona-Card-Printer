@@ -1,0 +1,13 @@
+<svg viewBox="0 0 24 24" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paper part -->
+  <rect x="7" y="14" width="10" height="5" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/>
+  <!-- Printer body -->
+  <rect x="4" y="8" width="16" height="8" rx="2" stroke="currentColor" stroke-width="1.4" fill="none"/>
+  <!-- Printer top/cover -->
+  <rect x="6.5" y="3" width="11" height="4.5" rx="1" stroke="currentColor" stroke-width="1.4" fill="none"/>
+  <!-- Print button light -->
+  <circle cx="8.5" cy="12" r="1" fill="currentColor"/>
+  <!-- Paper lines for detail -->
+  <line x1="9.5" y1="16.2" x2="14.5" y2="16.2" stroke="currentColor" stroke-width="1"/>
+  <line x1="9.5" y1="17.6" x2="14.5" y2="17.6" stroke="currentColor" stroke-width="1"/>
+</svg>
