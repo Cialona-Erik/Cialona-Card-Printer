@@ -5,17 +5,17 @@
   <title>Print Trello Card</title>
   <style>
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;        /* Use modern font */
-      background: #f4f6fa;                               /* Soft background */
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6fa;
       padding: 40px 0;
     }
     .card-print {
-      max-width: 800px;                                  /* Wider card */
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 0 30px 0;
       background: #fff;
-      border-radius: 16px;                               /* Rounded corners */
-      box-shadow: 0 6px 24px 0 #c1c9d6;                 /* Soft shadow */
+      border-radius: 16px;
+      box-shadow: 0 6px 24px 0 #c1c9d6;
       text-align: left;
       position: relative;
       overflow: hidden;
@@ -25,9 +25,9 @@
       margin: 28px auto 18px auto;
       padding: 11px 34px;
       font-size: 1.1em;
-      background: #26044e;                               /* Cialona brand color */
-      color: #f79a14;                                   /* Cialona brand accent */
-      font-weight: 700;                                 /* Bold */
+      background: #26044e;
+      color: #f79a14;
+      font-weight: 700;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -35,13 +35,13 @@
       transition: background .18s;
     }
     .print-btn:hover {
-      background: #5d43a7;                               /* Hover color */
+      background: #5d43a7;
     }
     .card-meta-row {
-      display: flex;                                     /* Row for meta info */
+      display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 10px 10px 10px;                         /* Top padding above cover */
+      padding: 16px 10px 10px 10px;
       min-height: 48px;
       gap: 18px;
       background: #fff;
@@ -52,9 +52,9 @@
       gap: 7px;
     }
     .member-avatar {
-      width: 36px;                                       /* Avatar size */
+      width: 36px;
       height: 36px;
-      border-radius: 50%;                                /* Circular avatar */
+      border-radius: 50%;
       background: #eee;
       object-fit: cover;
       display: inline-block;
@@ -70,13 +70,26 @@
     }
     .card-due {
       font-size: 1em;
-      color: #000000;                                    /* Black for due date */
-      background: #f7f8fa;                               /* Soft grey background */
+      color: #000000;
+      background: #f7f8fa;
       border-radius: 6px;
       padding: 6px 16px;
       font-weight: 500;
       min-width: 112px;
       text-align: right;
+    }
+    .cialona-logo-row {
+      text-align: center;
+      background: #f6f7fa;
+      padding: 18px 0 12px 0;
+    }
+    .cialona-logo {
+      height: 50px;
+      max-width: 180px;
+      object-fit: contain;
+      display: inline-block;
+      filter: drop-shadow(0 2px 8px #e0e0e0);
+      margin-bottom: 4px;
     }
     .card-cover {
       width: 100%;
@@ -88,10 +101,10 @@
       margin-bottom: 0;
     }
     .card-content {
-      padding: 10px 10px 0 10px;                         /* Padding around content */
+      padding: 10px 10px 0 10px;
     }
     .card-title {
-      font-size: 1.5em;                                  /* Title size */
+      font-size: 1.5em;
       font-weight: 500;
       color: #000000;
       letter-spacing: 0.2px;
@@ -114,78 +127,82 @@
         margin: 0;
       }
       .card-meta-row { padding-top: 0; }
+      .cialona-logo-row { padding-top: 10px; }
     }
   </style>
 </head>
 <body>
   <div class="card-print">
-    <button class="print-btn" onclick="window.print()">Print this Card</button> <!-- Print button -->
-
+    <button class="print-btn" onclick="window.print()">Print this Card</button>
+    
     <div class="card-meta-row">
-      <div class="card-members" id="members"></div>      <!-- Avatars/names upper left -->
-      <div class="card-due" id="due"></div>              <!-- Due date upper right -->
+      <div class="card-members" id="members"></div>
+      <div class="card-due" id="due"></div>
     </div>
-
-    <img id="cover" class="card-cover" />                <!-- Cover image (below meta row) -->
-
+    
+    <!-- Cialona logo centered above cover -->
+    <div class="cialona-logo-row">
+      <img src="https://cialona.com/assets/images/logo.png" class="cialona-logo" alt="Cialona Logo" />
+    </div>
+    
+    <img id="cover" class="card-cover" />
+    
     <div class="card-content">
-      <div class="card-title" id="title"></div>          <!-- Card title -->
-      <div class="card-desc" id="desc"></div>            <!-- Card description (Markdown) -->
+      <div class="card-title" id="title"></div>
+      <div class="card-desc" id="desc"></div>
     </div>
   </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    var t = TrelloPowerUp.iframe(); // Trello Power-Up context
-    const params = new URLSearchParams(window.location.search); // Get params
+    var t = TrelloPowerUp.iframe();
+    const params = new URLSearchParams(window.location.search);
 
     // Set the cover image if present
-    const coverUrl = params.get('cover'); // Cover image URL from query
+    const coverUrl = params.get('cover');
     if (coverUrl) {
       const cover = document.getElementById('cover');
-      cover.src = coverUrl;                // Set image src
-      cover.style.display = 'block';       // Show image
+      cover.src = coverUrl;
+      cover.style.display = 'block';
     }
 
     // --- Members ---
-    const membersRaw = params.get('members'); // Members info from query
+    const membersRaw = params.get('members');
     if (membersRaw) {
       let members = [];
-      try {
-        members = JSON.parse(membersRaw);  // Parse JSON array
-      } catch (e) {}
+      try { members = JSON.parse(membersRaw); } catch (e) {}
       const membersDiv = document.getElementById('members');
       if (Array.isArray(members) && members.length) {
         members.forEach(m => {
           let img = '';
           if (m.avatarUrl) {
-            img = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`; // Member avatar
+            img = `<img src="${m.avatarUrl}/170.png" class="member-avatar" alt="">`;
           } else {
-            img = `<span class="member-avatar" style="background:#ccc;"></span>`;    // Default avatar
+            img = `<span class="member-avatar" style="background:#ccc;"></span>`;
           }
-          membersDiv.innerHTML += img + `<span class="member-name">${m.fullName}</span>`; // Name
+          membersDiv.innerHTML += img + `<span class="member-name">${m.fullName}</span>`;
         });
       }
     }
 
     // --- Due date ---
-    const dueRaw = params.get('due'); // Due date from query
+    const dueRaw = params.get('due');
     if (dueRaw) {
       const date = new Date(dueRaw);
       const options = { year: 'numeric', month: 'short', day: 'numeric', hour:'2-digit', minute:'2-digit' };
-      document.getElementById('due').textContent = "Due: " + date.toLocaleString(undefined, options); // Format date
+      document.getElementById('due').textContent = "Due: " + date.toLocaleString(undefined, options);
     }
 
     // Set the card title
-    document.getElementById('title').textContent = params.get('name') || 'No Title'; // Title
+    document.getElementById('title').textContent = params.get('name') || 'No Title';
 
     // Render the description as Markdown
     const desc = params.get('desc') || '';
-    document.getElementById('desc').innerHTML = marked.parse(desc); // Markdown desc
+    document.getElementById('desc').innerHTML = marked.parse(desc);
 
     // Resize modal for Trello Power-Up
     t.render(() => {
-      t.sizeTo('.card-print').done(); // Fit modal to card
+      t.sizeTo('.card-print').done();
     });
   </script>
 </body>
