@@ -59,7 +59,7 @@ TrelloPowerUp.initialize({
     console.log('card-back-section handler called');
     return {
       title: 'Print this Card - Cialona - Powered by E.Zwart',
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.svg',
+      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
       content: {
         type: 'iframe',
         url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html',
