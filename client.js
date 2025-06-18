@@ -53,16 +53,16 @@ TrelloPowerUp.initialize({
   },
 
   'printCard': printCard,
-  'card-back-section': function(t) {
-    console.log('card-back-section handler called');
-    return t.signUrl('https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html').then(signedUrl => ({
-      title: '[Print this Card - Powered by E.Zwart]',
-      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
-      content: {
-        type: 'iframe',
-        url: signedUrl,
-        height: 60
-      }
-    }));
-  }
+'card-back-section': function(t) {
+  return t.signUrl('https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html?signed').then(signedUrl => ({
+    title: 'Print this Card - Powered by E.Zwart',
+    icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
+    content: {
+      type: 'iframe',
+      url: signedUrl,
+      height: 60
+    }
+  }));
+}
+  
 });
