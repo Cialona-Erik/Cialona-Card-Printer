@@ -48,12 +48,11 @@ TrelloPowerUp.initialize({
       icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
       text: 'Print this card',
       condition: 'edit',
-      callback: printCard // ✅ Linked named function here
+      callback: printCard
     }];
   },
 
-  'printCard': printCard, // ✅ Bind function name for manifest
-
+  'printCard': printCard,
   'card-back-section': function(t) {
     console.log('card-back-section handler called');
     return t.signUrl('https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html').then(signedUrl => ({
