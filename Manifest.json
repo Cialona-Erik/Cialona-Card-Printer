@@ -1,20 +1,11 @@
 {
   "name": "Cialona-Card-Printer",
-  "id": "Cialona-card-printer",
+  "id": "cialona-card-printer",
   "author": "Erik Zwart - DodDes1gn",
   "icon": {
     "url": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
   },
   "capabilities": {
-    "card-back-section": {
-      "title": "Print this Card - Powered by E.Zwart",
-      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
-      "content": {
-        "type": "iframe",
-        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html", 
-        "height": 60
-      }
-    },
     "card-buttons": [
       {
         "text": "Print this card",
@@ -22,12 +13,19 @@
         "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg"
       }
     ],
+    "card-back-section": {
+      "title": "Print this Card — Cialona",
+      "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
+      "content": {
+        "type": "iframe",
+        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html",
+        "height": 60
+      }
+    },
     "show-settings": {
       "url": "https://cialona-erik.github.io/Cialona-Card-Printer/index.html",
       "height": 100
     }
   },
-  "connectors": {},
-  "permissions": [],
   "version": "1.0"
 }
