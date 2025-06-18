@@ -54,16 +54,17 @@ TrelloPowerUp.initialize({
     }];
   },
 
-'card-back-section': function(t) {
-  return {
-    title: 'Print this card',
-    icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg',
-    content: {
-      type: 'iframe',
-      url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html?v=4'', // <--- MUST point to working file!
-      height: 68 // try a bit higher if not visible
-    }
-  };
-}
-  
+// This part can add a new row under the description in the card pop up
+//  'card-back-section': function(t) {
+//    console.log('card-back-section handler called');
+//    return {
+//      title: 'Card Tools',
+//      icon: 'https://cialona-erik.github.io/Cialona-Card-Printer/printer-small.png',
+//      content: {
+//        type: 'iframe',
+//        url: 'https://cialona-erik.github.io/Cialona-Card-Printer/index.html',
+//        height: 50
+//      }
+//    };
+//  }
 });
