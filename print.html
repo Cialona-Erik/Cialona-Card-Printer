@@ -24,7 +24,7 @@
       width: 100%;
       height: 160px;
       object-fit: cover;
-      display: block;
+      display: none;
       background: #e5e8f0;
     }
     .card-content {
@@ -72,10 +72,41 @@
       }
     }
   </style>
-  <!-- Marked.js for Markdown rendering -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <div class="card-print">
-    <img id="cover" class="card-cover" style="display:none;" />
-    <div class="card-conten
+    <img id="cover" class="card-cover" />
+    <div class="card-content">
+      <div class="card-title" id="title"></div>
+      <div class="card-desc" id="desc"></div>
+      <button class="print-btn" onclick="window.print()">Print</button>
+    </div>
+  </div>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    var t = TrelloPowerUp.iframe();
+    const params = new URLSearchParams(window.location.search);
+
+    // Set the cover image if present
+    const coverUrl = params.get('cover');
+    if (coverUrl) {
+      const cover = document.getElementById('cover');
+      cover.src = coverUrl;
+      cover.style.display = 'block';
+    }
+
+    // Set the card title
+    document.getElementById('title').textContent = params.get('name') || 'No Title';
+
+    // Render the description as Markdown
+    const desc = params.get('desc') || '';
+    document.getElementById('desc').innerHTML = marked.parse(desc);
+
+    // Resize modal for Trello Power-Up
+    t.render(() => {
+      t.sizeTo('.card-print').done();
+    });
+  </script>
+</body>
+</html>
