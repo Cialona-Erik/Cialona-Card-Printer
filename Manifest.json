@@ -18,7 +18,7 @@
       "icon": "https://cialona-erik.github.io/Cialona-Card-Printer/Print-Button.svg",
       "content": {
         "type": "iframe",
-        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html?signed"
+        "url": "https://cialona-erik.github.io/Cialona-Card-Printer/print-button.html?signed",
         "height": 60
       }
     },
