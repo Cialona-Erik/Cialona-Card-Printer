@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Signed Iframe Check</title>
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f5f7;
+    }
+    .result {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    .ok { color: green; font-weight: bold; }
+    .fail { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="result" id="status">Checking signed iframe context…</div>
+
+  <script>
+    const t = TrelloPowerUp.iframe({ url: window.location.href });
+
+    window.addEventListener("load", () => {
+      const div = document.getElementById("status");
+
+      const isSigned = /[?&]signed=/.test(window.location.href);
+
+      if (isSigned) {
+        div.innerHTML = '<p class="ok">✅ This iframe was loaded with a <code>?signed</code> token.<br>Power-Up API calls will work correctly.</p>';
+      } else {
+        div.innerHTML = '<p class="fail">❌ This iframe was <strong>not</strong> loaded with a <code>?signed</code> token.<br><strong>Power-Up API calls will fail silently.</strong><br><br>Check your <code>Manifest.json</code> and ensure Trello is loading this from a <code>signed: true</code> configuration.</p>';
+      }
+
+      console.log("Iframe URL:", window.location.href);
+    });
+  </script>
+</body>
+</html>
