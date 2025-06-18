@@ -39,63 +39,28 @@
     }
     .card-cover {
       width: 100%;
-      height: 300px;
-      object-fit: contain;
-      object-position: center center;
-      display: none;
-      background: #e5e8f0;
+      height: 300px;                       /* ← Set to whatever px you want */
+      object-fit: contain;                   /* ← Ensures image fills area, cropping if needed */
+      object-position: center center;      /* ← Center the image if it's cropped */
+      display: none;                       /* Shown by JS if present */
+      background: #e5e8f0;                 /* Fallback bg color */
     }
     .card-content {
       padding: 10px 10px 0 10px;
     }
-    .card-title {
-      font-size: 1.3em;
+    .card-title {                           /* Card Title */   
+      font-size: 1.3em;                     /* Text Height */              
       font-weight: 500;
-      color: #000;
+      color: #000000;                       /* Text Color */     
       letter-spacing: 0.2px;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
       text-align: left;
       word-break: break-word;
     }
-    .card-meta {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      margin-bottom: 18px;
-      font-size: 0.92em;
-      color: #222;
-    }
-    .card-members {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .member-avatar {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #f4f6fa;
-      background: #eee;
-      box-shadow: 0 1px 3px #eee;
-    }
-    .member-initials {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #b7bac7;
-      color: #fff;
-      font-size: 1em;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 1px 3px #eee;
-    }
     .card-desc {
       margin-bottom: 28px;
-      color: #000;
-      font-size: 0.98em;
+      color: #00000;
+      font-size: 0.83em;                    /* Text Height */  
       line-height: 1.7;
       min-height: 32px;
     }
@@ -111,23 +76,16 @@
 </head>
 <body>
   <div class="card-print">
-    <button class="print-btn" id="printBtn">Print this Card</button>
+    <button class="print-btn" onclick="window.print()">Print this Card</button>
     <img id="cover" class="card-cover" />
     <div class="card-content">
       <div class="card-title" id="title"></div>
-      <div class="card-meta">
-        <div id="due"></div>
-        <div class="card-members" id="members"></div>
-      </div>
       <div class="card-desc" id="desc"></div>
     </div>
   </div>
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    // Print button handler (ALWAYS PLAIN JS)
-    document.getElementById('printBtn').onclick = function() { window.print(); };
-
     var t = TrelloPowerUp.iframe();
     const params = new URLSearchParams(window.location.search);
 
@@ -145,44 +103,6 @@
     // Render the description as Markdown
     const desc = params.get('desc') || '';
     document.getElementById('desc').innerHTML = marked.parse(desc);
-
-    // Render due date (if present)
-    const dueRaw = params.get('due');
-    if (dueRaw) {
-      const date = new Date(dueRaw);
-      document.getElementById('due').innerHTML =
-        '<b>Due:</b> ' + date.toLocaleDateString() + ' ' +
-        date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    }
-
-    // Render members
-    const membersDiv = document.getElementById('members');
-    let members = [];
-    try {
-      members = JSON.parse(params.get('members') || '[]');
-    } catch (e) {}
-    if (members && members.length > 0) {
-      members.forEach(member => {
-        if (member.avatarUrl) {
-          // Use avatar
-          const img = document.createElement('img');
-          img.src = member.avatarUrl + '/30.png';
-          img.alt = member.fullName || '';
-          img.title = member.fullName || '';
-          img.className = 'member-avatar';
-          membersDiv.appendChild(img);
-        } else {
-          // Use initials
-          const span = document.createElement('span');
-          span.className = 'member-initials';
-          span.textContent = member.fullName
-            ? member.fullName.split(' ').map(s => s[0]).join('').substring(0,2).toUpperCase()
-            : '?';
-          span.title = member.fullName || '';
-          membersDiv.appendChild(span);
-        }
-      });
-    }
 
     // Resize modal for Trello Power-Up
     t.render(() => {
