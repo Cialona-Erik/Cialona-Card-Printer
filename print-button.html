@@ -45,12 +45,25 @@
 
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script>
+    console.log('print-button.html loaded');
+
     const t = TrelloPowerUp.iframe();
 
     t.render(() => {
+      console.log('Trello iframe rendered');
       const btn = document.getElementById('cardPrint');
+
+      if (!btn) {
+        console.error('Print button not found in DOM');
+        return;
+      }
+
       btn.addEventListener('click', () => {
+        console.log('Print button clicked');
+
         t.card('name', 'desc', 'cover', 'due', 'members').then(card => {
+          console.log('Card data:', card);
+
           let coverUrl = '';
           if (card.cover?.sharedSourceUrl) {
             coverUrl = card.cover.sharedSourceUrl;
@@ -76,9 +89,9 @@
 
           const fullUrl = `${baseUrl}?${query}`;
 
-          // Use signUrl only if it exists in the iframe context
           if (typeof t.signUrl === 'function') {
             t.signUrl(fullUrl).then(signedUrl => {
+              console.log('Opening signed modal:', signedUrl);
               t.modal({
                 url: signedUrl,
                 title: 'Print Card - Powered by E.Zwart',
@@ -86,8 +99,11 @@
                 width: 880,
                 fullscreen: false
               });
+            }).catch(err => {
+              console.error('Error signing URL:', err);
             });
           } else {
+            console.log('Opening unsigned modal:', fullUrl);
             t.modal({
               url: fullUrl,
               title: 'Print Card - Powered by E.Zwart',
@@ -96,6 +112,8 @@
               fullscreen: false
             });
           }
+        }).catch(err => {
+          console.error('Error retrieving card data:', err);
         });
       });
     });
