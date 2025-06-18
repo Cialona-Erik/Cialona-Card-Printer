@@ -111,7 +111,7 @@
 </head>
 <body>
   <div class="card-print">
-    <button class="print-btn" onclick="window.print()">Print this Card</button>
+    <button class="print-btn" id="printBtn">Print this Card</button>
     <img id="cover" class="card-cover" />
     <div class="card-content">
       <div class="card-title" id="title"></div>
@@ -125,6 +125,9 @@
   <script src="https://p.trellocdn.com/power-up.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
+    // Print button handler (ALWAYS PLAIN JS)
+    document.getElementById('printBtn').onclick = function() { window.print(); };
+
     var t = TrelloPowerUp.iframe();
     const params = new URLSearchParams(window.location.search);
 
@@ -172,7 +175,6 @@
           // Use initials
           const span = document.createElement('span');
           span.className = 'member-initials';
-          // If fullName present, use initials
           span.textContent = member.fullName
             ? member.fullName.split(' ').map(s => s[0]).join('').substring(0,2).toUpperCase()
             : '?';
