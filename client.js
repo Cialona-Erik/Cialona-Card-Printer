@@ -56,16 +56,16 @@ TrelloPowerUp.initialize({
 
   'printCard': printCard,
 
-  'card-back-section': function(t) {
-    console.log('card-back-section handler called');
-    return {
-      title: 'Print this Card - Powered by E.Zwart',
-      icon: BASE_URL + '/Print-Button.svg',
-      content: {
-        type: 'iframe',
-        url: BASE_URL + '/print-button.html',
-        height: 60
-      }
-    };
-  }
+//  'card-back-section': function(t) {
+//    console.log('card-back-section handler called');
+//    return {
+//      title: 'Print this Card - Powered by E.Zwart',
+//      icon: BASE_URL + '/Print-Button.svg',
+//      content: {
+//      type: 'iframe',
+//      url: BASE_URL + '/print-button.html',
+//      height: 60
+//     }
+//    };
+//  }
 });
